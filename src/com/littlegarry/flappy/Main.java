@@ -45,7 +45,7 @@ public class Main implements Runnable{
 		init();
 		 
 		while (running) {
-			render();
+			render(); 
 			Display.update();
 			if (Display.isCloseRequested()) running = false;
 		}

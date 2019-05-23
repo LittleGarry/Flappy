@@ -4,17 +4,18 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import com.littlegarry.flappy.util.BufferUtils;
 
 public class Texture {
 	private int width, height;
 	private int texture;
 	
 	public Texture(String path) {
-		
+		texture = load(path);
 	}
 	
 	private int load(String path) {
@@ -44,5 +45,22 @@ public class Texture {
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, 0, GL_UNSIGNED_BYTE, BufferUtils.createIntBuffer(data));
+		glBindTexture(GL_TEXTURE_2D, 0);
+		
+		return tex;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getId() {
+		return texture;
 	}
 }
