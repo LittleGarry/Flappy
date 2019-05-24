@@ -1,6 +1,9 @@
 package com.littlegarry.flappy;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.ContextAttribs;
 import org.lwjgl.opengl.Display;
@@ -43,7 +46,10 @@ public class Main implements Runnable{
 		}
 		
 		init();
-		 
+		
+		int vao = glGenVertexArrays();
+		glBindVertexArray(vao);
+		
 		while (running) {
 			render(); 
 			Display.update();
@@ -55,6 +61,7 @@ public class Main implements Runnable{
 	
 	private void render() {
 		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 	
 	public static void main(String[] args) {
