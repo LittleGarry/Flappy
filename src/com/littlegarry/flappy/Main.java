@@ -1,7 +1,6 @@
 package com.littlegarry.flappy;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
 import org.lwjgl.LWJGLException;
@@ -10,7 +9,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
 
-import com.littlegarry.flappy.util.ShaderUtils;
+import com.littlegarry.flappy.graphics.Shader;
+import com.littlegarry.flappy.math.Vector3f;
 
 public class Main implements Runnable{
 	
@@ -32,6 +32,8 @@ public class Main implements Runnable{
 		System.out.println("OpenGL " + version);
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		
+		Shader.loadAll();
 	}
 	
 	public void run() {
@@ -50,8 +52,9 @@ public class Main implements Runnable{
 		int vao = glGenVertexArrays();
 		glBindVertexArray(vao);
 		
-		int shader = ShaderUtils.load("shaders/shader.vert", "shaders/shader.frag");
-		glUseProgram(shader);
+		Shader shader = Shader.BASIC;
+		shader.enable();
+		shader.setUniform3f("col", new Vector3f(0.5f, 0.6f, 0.1f));
 		
 		while (running) {
 			render(); 
