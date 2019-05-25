@@ -50,6 +50,9 @@ public class Main implements Runnable{
 		int vao = glGenVertexArrays();
 		glBindVertexArray(vao);
 		
+		int shader = ShaderUtils.load("shaders/shader.vert", "shaders/shader.frag");
+		glUseProgram(shader);
+		
 		while (running) {
 			render(); 
 			Display.update();
