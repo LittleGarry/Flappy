@@ -1,16 +1,8 @@
 package com.littlegarry.flappy;
 
+
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL30.*;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.ContextAttribs;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.PixelFormat;
-
-import com.littlegarry.flappy.graphics.Shader;
-import com.littlegarry.flappy.math.Vector3f;
 
 public class Main implements Runnable{
 	
@@ -18,56 +10,40 @@ public class Main implements Runnable{
 	private int height = 720;
 	private String title = "Flappy";
 	
+	private long window;
+	
 	private boolean running = false;
 	private Thread thread;
 	
 	public void start() {
 		running = true;
-		thread = new Thread(this, "Display");
+		thread = new Thread(this, "Game");
 		thread.start();
 	}
 	
 	private void init() {
-		String version = glGetString(GL_VERSION);
-		System.out.println("OpenGL " + version);
+		if (!glfwInit()) {
+			
+		}
 		
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
-		Shader.loadAll();
+		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 	}
 	
 	public void run() {
-		try {
-			Display.setDisplayMode(new DisplayMode(width, height));
-			Display.setTitle(title);
-			ContextAttribs context = new ContextAttribs(3, 3);
-			if (System.getProperty("os.name").contains("Mac"))	context = new ContextAttribs(3, 2);
-			Display.create(new PixelFormat(), context.withProfileCore(true));
-		} catch (LWJGLException e) { 
-			e.printStackTrace();
-		}
-		
 		init();
 		
-		int vao = glGenVertexArrays();
-		glBindVertexArray(vao);
-		
-		Shader shader = Shader.BASIC;
-		shader.enable();
-		shader.setUniform3f("col", new Vector3f(0.5f, 0.6f, 0.1f));
-		
 		while (running) {
-			render(); 
-			Display.update();
-			if (Display.isCloseRequested()) running = false;
+			update();
+			render();
 		}
+	}
+	
+	private  void update() {
 		
-		Display.destroy();
 	}
 	
 	private void render() {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 	}
 	
 	public static void main(String[] args) {
