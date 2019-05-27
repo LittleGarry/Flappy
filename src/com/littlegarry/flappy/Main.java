@@ -3,6 +3,7 @@ package com.littlegarry.flappy;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main implements Runnable{
 	
@@ -27,6 +28,7 @@ public class Main implements Runnable{
 		}
 		
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+		window = glfwCreateWindow(width, height, title, NULL, NULL);
 	}
 	
 	public void run() {
