@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 
 import com.littlegarry.flappy.input.Input;
 
@@ -45,6 +46,10 @@ public class Main implements Runnable{
 		
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
+		GL.createCapabilities();
+		
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glEnable(GL_DEPTH_TEST);
 	}
 	
 	public void run() {
@@ -64,6 +69,7 @@ public class Main implements Runnable{
 	}
 	
 	private void render() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glfwSwapBuffers(window);
 	}
 	
