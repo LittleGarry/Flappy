@@ -7,6 +7,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWVidMode;
 
+import com.littlegarry.flappy.input.Input;
+
 
 public class Main implements Runnable{
 	
@@ -38,6 +40,8 @@ public class Main implements Runnable{
 		
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(window, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2);
+		
+		glfwSetKeyCallback(window, new Input());
 		
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
