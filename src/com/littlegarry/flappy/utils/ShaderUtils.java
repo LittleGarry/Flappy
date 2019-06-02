@@ -49,6 +49,7 @@ public class ShaderUtils {
 		
 		glDeleteShader(vertID);
 		glDeleteShader(fragID);
+		
 		return program;
 	}
 	
