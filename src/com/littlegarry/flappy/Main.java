@@ -8,7 +8,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import com.littlegarry.flappy.graphics.Shader;
 import com.littlegarry.flappy.input.Input;
+import com.littlegarry.flappy.level.Level;
+import com.littlegarry.flappy.math.Matrix4f;
 
 
 public class Main implements Runnable{
@@ -21,6 +24,8 @@ public class Main implements Runnable{
 	
 	private boolean running = false;
 	private Thread thread;
+	
+	private Level level;
 	
 	public void start() {
 		running = true;
@@ -50,6 +55,15 @@ public class Main implements Runnable{
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glEnable(GL_DEPTH_TEST);
+		
+		System.out.println("OpenGL: " + glGetString(GL_VERSION));
+		
+		Shader.loadAll();
+		
+		Matrix4f pr_matrix = Matrix4f.orthographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -1.0f, 1.0f);
+		Shader.BG.setUniformMat4f("pr_matrix", pr_matrix);
+		
+		level = new Level();
 	}
 	
 	public void run() {
@@ -70,6 +84,7 @@ public class Main implements Runnable{
 	
 	private void render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		level.render();
 		glfwSwapBuffers(window);
 	}
 	
