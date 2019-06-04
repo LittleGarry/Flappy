@@ -3,6 +3,7 @@ package com.littlegarry.flappy;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWVidMode;
@@ -55,6 +56,7 @@ public class Main implements Runnable{
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glEnable(GL_DEPTH_TEST);
+		glActiveTexture(GL_TEXTURE1);
 		
 		System.out.println("OpenGL: " + glGetString(GL_VERSION));
 		
@@ -62,6 +64,7 @@ public class Main implements Runnable{
 		
 		Matrix4f pr_matrix = Matrix4f.orthographic(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -1.0f, 1.0f);
 		Shader.BG.setUniformMat4f("pr_matrix", pr_matrix);
+		Shader.BG.setUniform1i("tex", 1);
 		
 		level = new Level();
 	}

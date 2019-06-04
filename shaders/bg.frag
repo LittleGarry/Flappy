@@ -2,6 +2,13 @@
 
 layout (location = 0) out vec4 color;
 
+in DATA
+{
+	vec2 tc;
+} fs_in;
+
+uniform sampler2D tex;
+
 void main() {
-	color = vec4(0.2f, 0.4f, 0.8f, 1.0f); 
+	color = texture(tex, fs_in.tc); 
 }
