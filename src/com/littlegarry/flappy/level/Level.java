@@ -3,11 +3,16 @@ package com.littlegarry.flappy.level;
 import com.littlegarry.flappy.graphics.Shader;
 import com.littlegarry.flappy.graphics.Texture;
 import com.littlegarry.flappy.graphics.VertexArray;
+import com.littlegarry.flappy.math.Matrix4f;
+import com.littlegarry.flappy.math.Vector3f;
 
 public class Level {
 	
 	private VertexArray background;
 	private Texture bgTexture;
+	
+	private int xScroll = 0;
+	private int map = 0;
 	
 	public Level() {
 		
@@ -34,10 +39,20 @@ public class Level {
 		bgTexture = new Texture("res/bg.jpeg");
 	}
 	
+	public void update() {
+		xScroll--;
+		if (-xScroll % 335 == 0)
+			map++;
+	}
+	
 	public void render() {
 		bgTexture.bind();
 		Shader.BG.enable();
-		background.render();
+		background.bind();
+		for (int i = map; i < map + 3; i++) {
+			Shader.BG.setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
+			background.draw();
+		}
 		Shader.BG.disable();
 		bgTexture.unbind();
 	}

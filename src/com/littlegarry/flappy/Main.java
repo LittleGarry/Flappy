@@ -83,6 +83,7 @@ public class Main implements Runnable{
 	
 	private  void update() {
 		glfwPollEvents();
+		level.update();
 	}
 	
 	private void render() {
