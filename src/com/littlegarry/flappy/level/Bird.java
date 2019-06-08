@@ -1,8 +1,11 @@
 package com.littlegarry.flappy.level;
 
+import org.lwjgl.glfw.GLFW;
+
 import com.littlegarry.flappy.graphics.Shader;
 import com.littlegarry.flappy.graphics.Texture;
 import com.littlegarry.flappy.graphics.VertexArray;
+import com.littlegarry.flappy.input.Input;
 import com.littlegarry.flappy.math.Matrix4f;
 import com.littlegarry.flappy.math.Vector3f;
 
@@ -40,7 +43,14 @@ public class Bird {
 	}
 	
 	public void update() {
-		
+		if (Input.keys[GLFW.GLFW_KEY_UP])
+			position.y++;
+		if (Input.keys[GLFW.GLFW_KEY_DOWN])
+			position.y--;
+		if (Input.keys[GLFW.GLFW_KEY_LEFT])
+			position.x--;
+		if (Input.keys[GLFW.GLFW_KEY_RIGHT])
+			position.x++;
 	}
 	
 	public void render() {
