@@ -20,10 +20,10 @@ public class Bird {
 	
 	public Bird() {
 		float[] vertices = new float[] {
-			-SIZE / 2.0f, -SIZE / 2.0f, 0.0f,
-			-SIZE / 2.0f,  SIZE / 2.0f, 0.0f,
-			 SIZE / 2.0f,  SIZE / 2.0f, 0.0f,
-			 SIZE / 2.0f, -SIZE / 2.0f, 0.0f
+			-SIZE / 2.0f, -SIZE / 2.0f, 0.1f,
+			-SIZE / 2.0f,  SIZE / 2.0f, 0.1f,
+			 SIZE / 2.0f,  SIZE / 2.0f, 0.1f,
+			 SIZE / 2.0f, -SIZE / 2.0f, 0.1f
 		};
 		
 		byte[] indices = new byte[] {
