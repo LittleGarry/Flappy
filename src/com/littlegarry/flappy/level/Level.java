@@ -47,13 +47,15 @@ public class Level {
 		xScroll--;
 		if (-xScroll % 335 == 0)
 			map++;
+		
+		bird.update();
 	}
 	
 	public void render() {
 		bgTexture.bind();
 		Shader.BG.enable();
 		background.bind();
-		for (int i = map; i < map + 3; i++) {
+		for (int i = map; i < map + 4; i++) {
 			Shader.BG.setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
 			background.draw();
 		}

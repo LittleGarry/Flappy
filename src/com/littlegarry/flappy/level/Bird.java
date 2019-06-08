@@ -44,13 +44,13 @@ public class Bird {
 	
 	public void update() {
 		if (Input.keys[GLFW.GLFW_KEY_UP])
-			position.y++;
+			position.y += 0.1f;
 		if (Input.keys[GLFW.GLFW_KEY_DOWN])
-			position.y--;
+			position.y -= 0.1f;
 		if (Input.keys[GLFW.GLFW_KEY_LEFT])
-			position.x--;
+			position.x -= 0.1f;
 		if (Input.keys[GLFW.GLFW_KEY_RIGHT])
-			position.x++;
+			position.x += 0.1f;
 	}
 	
 	public void render() {
