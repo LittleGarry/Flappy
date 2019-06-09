@@ -36,4 +36,39 @@ public class Pipe {
 		mesh = new VertexArray(vertices, indices, tcs);
 		texture = new Texture("res/pipe.png");
 	}
+	
+	public Pipe(float x, float y) {
+		position.x = x;
+		position.y = y;
+		
+		ml_matrix = Matrix4f.translate(position);
+	}
+	
+	public float getX() {
+		return position.x;
+	}
+	
+	public float getY() {
+		return position.y;
+	}
+	
+	public Matrix4f getModelMatrix() {
+		return ml_matrix;
+	}
+	
+	public static float getWidth() {
+		return width;
+	}
+	
+	public static float getHeight() {
+		return height;
+	}
+	
+	public static Texture getTexture() {
+		return texture;
+	}
+	
+	public static VertexArray getMesh() {
+		return mesh;
+	}
 }

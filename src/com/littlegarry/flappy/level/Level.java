@@ -51,6 +51,10 @@ public class Level {
 		bird.update();
 	}
 	
+	private void renderPipes() {
+		
+	}
+	
 	public void render() {
 		bgTexture.bind();
 		Shader.BG.enable();
