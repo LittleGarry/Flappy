@@ -16,7 +16,7 @@ public class Shader {
 	
 	private boolean enabled = false;
 	
-	public static Shader BG, BIRD;
+	public static Shader BG, BIRD, PIPE;
 	
 	private final int ID;
 	private Map<String, Integer> locationCache = new HashMap<String, Integer>();
@@ -28,6 +28,7 @@ public class Shader {
 	public static void loadAll() {
 		BG = new Shader("shaders/bg.vert", "shaders/bg.frag");
 		BIRD = new Shader("shaders/bird.vert", "shaders/bird.frag");
+		PIPE = new Shader("shaders/pipe.vert", "shaders/pipe.frag");
 	}
 	
 	public int getUniform(String name) {
