@@ -112,6 +112,9 @@ public class Main implements Runnable{
 			if (glfwWindowShouldClose(window))
 				running = false;
 		}
+		
+		glfwDestroyWindow(window);
+		glfwTerminate();
 	}
 	
 	private  void update() {
