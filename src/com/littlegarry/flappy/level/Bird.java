@@ -27,8 +27,8 @@ public class Bird {
 		};
 		
 		byte[] indices = new byte[] {
-				0, 1, 2,
-				2, 3, 0
+			0, 1, 2,
+			2, 3, 0
 		};
 		
 		float[] tcs = new float[] {
