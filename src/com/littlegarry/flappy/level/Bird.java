@@ -60,4 +60,12 @@ public class Bird {
 		mesh.render();
 		Shader.BIRD.disable();
 	}
+
+	public float getY() {
+		return position.y;
+	}
+
+	public float getSize() {
+		return SIZE;
+	}
 }

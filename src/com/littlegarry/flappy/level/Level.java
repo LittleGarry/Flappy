@@ -70,6 +70,33 @@ public class Level {
 		index += 2;
 	}
 	
+	private boolean collision() {
+		for (int i = 0; i < 5 * 2; i++) {
+			float bx = -xScroll * 0.05f;
+			float by = bird.getY();
+			float px = pipes[i].getX();
+			float py = pipes[i].getY();
+		
+			float bx0 = bx - bird.getSize() / 2.0f;
+			float bx1 = bx + bird.getSize() / 2.0f;
+			float by0 = by - bird.getSize() / 2.0f;
+			float by1 = by + bird.getSize() / 2.0f;
+			
+			float px0 = px;
+			float px1 = px + Pipe.getWidth();
+			float py0 = py;
+			float py1 = py + Pipe.getHeight();
+			
+			if (bx1 > px0 && bx0 < px1) {
+				if (by1 > py0 && by0 < py1) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	public void update() {
 		xScroll--;
 		if (-xScroll % 335 == 0)
@@ -77,6 +104,10 @@ public class Level {
 		
 		if (-xScroll > 250 && -xScroll % 120 == 0)
 			updatePipes();
+		
+		if (collision()) {
+			System.out.println("Collision!");
+		}
 		
 		bird.update();
 	}
