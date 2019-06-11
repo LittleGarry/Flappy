@@ -23,6 +23,6 @@ void main()
 	if (color.w < 1.0)
 		discard;
 		
-	color *= 3.0 / (length(bird - fs_in.position.xy) + 2.5) + 0.3;
+	color *= 2.0 / (length(bird - fs_in.position.xy) + 2.5) + 0.7;
 	color.w = 1.0; 
 }

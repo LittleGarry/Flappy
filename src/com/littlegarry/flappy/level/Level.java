@@ -5,8 +5,10 @@ import java.util.Random;
 import com.littlegarry.flappy.graphics.Shader;
 import com.littlegarry.flappy.graphics.Texture;
 import com.littlegarry.flappy.graphics.VertexArray;
+import com.littlegarry.flappy.input.Input;
 import com.littlegarry.flappy.math.Matrix4f;
 import com.littlegarry.flappy.math.Vector3f;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Level {
 	
@@ -23,7 +25,7 @@ public class Level {
 	private Random random = new Random();
 	
 	private float OFFSET = 5.0f;
-	private boolean control = true;
+	private boolean control = true, reset = false;
 	
 	private float time = 0.0f;
 	
@@ -61,7 +63,7 @@ public class Level {
 		
 		for (int i = 0; i < 5 * 2; i += 2) {
 			pipes[i] = new Pipe(OFFSET + index * 3.0f, random.nextFloat() * 4);
-			pipes[i + 1] = new Pipe(pipes[i].getX(), pipes[i].getY() - 11.5f);
+			pipes[i + 1] = new Pipe(pipes[i].getX(), pipes[i].getY() - 12.5f);
 			
 			index += 2;
 		}
@@ -69,9 +71,13 @@ public class Level {
 	
 	private void updatePipes() {
 		pipes[index % 10] = new Pipe(OFFSET + index * 3.0f, random.nextFloat() * 4);
-		pipes[(index + 1) % 10] = new Pipe(pipes[index % 10].getX(), pipes[index % 10].getY() - 11.5f);
+		pipes[(index + 1) % 10] = new Pipe(pipes[index % 10].getX(), pipes[index % 10].getY() - 12.5f);
 		
 		index += 2;
+	}
+	
+	public boolean isGameOver() {
+		return reset;
 	}
 	
 	private boolean collision() {
@@ -116,6 +122,10 @@ public class Level {
 		if (control && collision()) {
 			bird.fall();
 			control = false;
+		}
+		
+		if (!control && Input.isKeyDown(GLFW_KEY_SPACE)) {
+			reset = true;
 		}
 		
 		time += 0.01f;

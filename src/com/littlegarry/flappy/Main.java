@@ -120,6 +120,9 @@ public class Main implements Runnable{
 	private  void update() {
 		glfwPollEvents();
 		level.update();
+		
+		if (level.isGameOver())
+			level = new Level();
 	}
 	
 	private void render() {
