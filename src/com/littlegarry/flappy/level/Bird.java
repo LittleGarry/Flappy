@@ -68,4 +68,8 @@ public class Bird {
 	public float getSize() {
 		return SIZE;
 	}
+	
+	public void fall() {
+		delta = -0.15f;
+	}
 }

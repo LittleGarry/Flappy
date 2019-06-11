@@ -21,7 +21,9 @@ public class Level {
 	private Pipe[] pipes = new Pipe[5 * 2];
 	
 	private Random random = new Random();
+	
 	private float OFFSET = 5.0f;
+	private boolean control = true;
 	
 	public Level() {
 		
@@ -98,18 +100,21 @@ public class Level {
 	}
 	
 	public void update() {
-		xScroll--;
-		if (-xScroll % 335 == 0)
-			map++;
-		
-		if (-xScroll > 250 && -xScroll % 120 == 0)
-			updatePipes();
-		
-		if (collision()) {
-			System.out.println("Collision!");
+		if (control) {
+			xScroll--;
+			if (-xScroll % 335 == 0)
+				map++;
+			
+			if (-xScroll > 250 && -xScroll % 120 == 0)
+				updatePipes();
 		}
 		
 		bird.update();
+		
+		if (control && collision()) {
+			bird.fall();
+			control = false;
+		}
 	}
 	
 	private void renderPipes() {
